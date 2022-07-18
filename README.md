@@ -1,0 +1,1 @@
+In the application, the Sign In and Sign Up screen fully coded for absolute beginner in very easy way and commented each and every line.In the application, you can find the frontend as well as backend, for backend we use Node JS and mongoDB (For database) and for frontend we use React Native (passing data to default nested components using Context Api )
