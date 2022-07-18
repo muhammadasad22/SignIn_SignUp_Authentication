@@ -12,10 +12,28 @@ export default (reducer, actions, defaultValue) => {
     }
 
     return (
+      // value represents the value for the context which
+      // we need to pass each default nested component
       <Context.Provider value={{state, ...boundActions}}>
         {children}
       </Context.Provider>
+      //Children is actually the <app/> component
+      //Through Context.Provider, we provide the way to pass data in app component
     );
   };
   return {Context, Provider};
 };
+
+//******** This code is write for to passing the array to childern components */
+
+// const BlogContext = React.createContext();
+
+// export const BlogProvider = ({children}) => {
+//   const blogPosts = [{title: 'Post 1'}, {title: 'Post 2'}];
+
+//   return (
+//     <BlogContext.Provider value={blogPosts}>{children}</BlogContext.Provider>
+//   );
+// };
+
+// export default BlogContext;

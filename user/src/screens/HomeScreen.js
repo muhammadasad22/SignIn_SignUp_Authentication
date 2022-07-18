@@ -1,14 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const TrackListScreen = () => {
+const HomeScreen = () => {
   return (
     <View>
-      <Text>TrackListScreen</Text>
+      <Text>HomeScreen</Text>
     </View>
   );
 };
 
-export default TrackListScreen;
+export default HomeScreen;
 
 const styles = StyleSheet.create({});

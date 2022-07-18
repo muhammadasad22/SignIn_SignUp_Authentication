@@ -1,6 +1,7 @@
 import createDataContext from './createDataContext';
-import tracker from '../api/tracker';
+import trackerApi from '../api/tracker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -33,7 +34,7 @@ const clearErrorMessage = dispatch => {
 const signup = dispatch => {
   return async ({email, password}) => {
     try {
-      const response = await tracker.post('/signup', {email, password});
+      const response = await trackerApi.post('/signup', {email, password});
       // console.log(response.data);
       // now we want to add this token to our device using asyncstorage
       // we can use the key 'token' and the value of the token
@@ -42,6 +43,7 @@ const signup = dispatch => {
       dispatch({type: 'signup', payload: response.data.token});
       // now we want to navigate to the main flow of the app
       // we can use the key 'reset' and the value of the token
+      alert('Data Added in Database Successfully, Now you can Signin');
     } catch (err) {
       dispatch({
         type: 'add_error',
@@ -55,13 +57,20 @@ const signup = dispatch => {
 };
 
 const signin = dispatch => {
-  return async ({email, password, navigation}) => {
+  return async ({email, password}) => {
     //Try to signin
     try {
-      const response = await tracker.post('/signin', {email, password});
+      const response = await trackerApi.post('/signin', {email, password});
+      console.log('Hello');
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({type: 'signin', payload: response.data.token});
-      navigation.navigate('TrackCreateScreen');
+
+      alert('Signin Successful');
+      // <Toast
+      //   style={{backgroundColor: '#ff0000'}}
+      //   textStyle={{color: '#fff'}}
+      //   text="Successfully Signed In"
+      // />;
     } catch (err) {
       console.log(err);
       dispatch({
