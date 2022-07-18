@@ -1,0 +1,14 @@
+export const colorPrimary = '#917DFF';
+export const colorPrimaryLight = '#A797FF';
+export const colorText = '#6F6F6F';
+export const colorLightGreen = '#53EDBC';
+export const colorStroke = '#E2E2E2';
+export const colorToolbar = '#F4F2FF';
+export const colorLightGrey = '#F3F6FC';
+export const colorBottomNav = '#F4F2FF';
+export const colorIconDarkGrey = '#C4C4C4';
+export const colorHeader = '#F9F8FF';
+export const colorYellow = '#F7BD01';
+export const colorOrange = '#FF8201';
+export const colorRed = '#FF3939';
+export const colorBlue = '#6195FF';
