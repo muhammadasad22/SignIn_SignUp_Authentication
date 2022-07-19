@@ -14,7 +14,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {allStory, filterCall} from '../config/Api';
-import {ChatList} from '../Components/ChatList';
+import {ChatList} from '../components/ChatList';
 import {getLogin} from '../config/Preferences';
 import {setjwt} from '../config/Api';
 import moment from 'moment';
