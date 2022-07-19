@@ -5,7 +5,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import Chat from '../screens/Chat';
+import Chat from '../views/Chat';
 
 const ANIMALS = ['Dog', 'Cat', 'Chicken', 'Dragon', 'Camel'];
 const Data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];

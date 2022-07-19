@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Mine from '../screens/Mine';
-import Unassined from '../screens/Unassined';
-import All from '../screens/All';
+import Mine from '../views/Mine';
+import Unassined from '../views/Unassined';
+import All from '../views/All';
 import {View} from 'react-native';
 import {Tab, Text, TabView} from 'react-native-elements';
 import {ChatList} from '../components/ChatList';

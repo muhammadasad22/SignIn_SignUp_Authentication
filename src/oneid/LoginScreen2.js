@@ -45,7 +45,7 @@ import {showToast} from './CustomToast';
 import {appID} from './Constants';
 
 import RNPickerSelect from 'react-native-picker-select';
-import Dashboard from '../screens/Dashboard';
+import Dashboard from '../views/Dashboard';
 import Preferences from '../config/Preferences';
 // import {StackActions, NavigationActions} from 'react-navigation';
 // import CountryPicker from 'react-native-country-picker-modal';
