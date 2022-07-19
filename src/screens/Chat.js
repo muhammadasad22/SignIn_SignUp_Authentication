@@ -17,7 +17,7 @@ import {
 import {Avatar} from 'react-native-elements';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {clearAll} from '../config/Preferences';
-import {Titlebar} from '../Components/Titlebar';
+import {Titlebar} from '../components/Titlebar';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -37,7 +37,7 @@ import {
 } from '../config/Api';
 import {userData, imageRead} from '../config/Api';
 import {connect, io} from 'socket.io-client';
-import {socket} from '../Socket';
+import {socket} from '../../Socket';
 import {Menu, MenuItem, MenuDivider} from 'react-native-material-menu';
 import DocumentPicker from 'react-native-document-picker';
 import Video from 'react-native-video';
@@ -483,7 +483,7 @@ const Chat = ({route, navigation}) => {
                   height: 25,
                   marginLeft: 5,
                 }}
-                source={require('../images/attach.png')}
+                source={require('../assets/iconImages/attach.png')}
               />
             </TouchableOpacity>
 
@@ -510,7 +510,7 @@ const Chat = ({route, navigation}) => {
                   height: 50,
                   marginLeft: 5,
                 }}
-                source={require('../images/sendtext.png')}
+                source={require('../assets/iconImages/sendtext.png')}
               />
             </TouchableOpacity>
           </View>
@@ -558,7 +558,7 @@ const Chat = ({route, navigation}) => {
 
                   marginLeft: 5,
                 }}
-                source={require('../images/attach.png')}
+                source={require('../assets/iconImages/attach.png')}
               />
             </TouchableOpacity>
 
@@ -586,7 +586,7 @@ const Chat = ({route, navigation}) => {
 
                   marginLeft: 5,
                 }}
-                source={require('../images/sendtext.png')}
+                source={require('../assets/iconImages/sendtext.png')}
               />
             </TouchableOpacity>
           </View>

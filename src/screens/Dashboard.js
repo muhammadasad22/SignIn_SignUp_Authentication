@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,21 +6,20 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { Titlebar } from '../Components/Titlebar';
-import { LineChart } from 'react-native-chart-kit';
-import { dashboardData } from '../config/Api';
-import { CommonActions } from '@react-navigation/native';
-import Loader from '../Components/Loader';
+import {Titlebar} from '../components/Titlebar';
+import {LineChart} from 'react-native-chart-kit';
+import {dashboardData} from '../config/Api';
+import {CommonActions} from '@react-navigation/native';
+import Loader from '../components/Loader';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const screenWidth = Dimensions.get('window').width;
-
 
 const chartConfig = {
   backgroundGradientFrom: '#FFFFFF',
@@ -34,7 +33,7 @@ const chartConfig = {
   // useShadowColorFromDataset: false, // optional
 };
 
-const Dashboard = ({ navigation }) => {
+const Dashboard = ({navigation}) => {
   const [dashdata, setdashdata] = useState('');
   const [isloading, setloading] = useState(true);
   const [opencount, setopoencount] = useState([]);
@@ -80,7 +79,7 @@ const Dashboard = ({ navigation }) => {
           navigation.dispatch(
             CommonActions.reset({
               index: 1,
-              routes: [{ name: 'LoginScreen' }],
+              routes: [{name: 'LoginScreen'}],
             }),
           );
 
@@ -103,7 +102,7 @@ const Dashboard = ({ navigation }) => {
       });
   };
   return (
-    <View style={{ color: '#000000' }}>
+    <View style={{color: '#000000'}}>
       <Titlebar
         backpic={true}
         nullimage={false}
@@ -115,7 +114,7 @@ const Dashboard = ({ navigation }) => {
         avater={true}
       />
 
-      <View style={{ backgroundColor: 'white', height: '100%' }}>
+      <View style={{backgroundColor: 'white', height: '100%'}}>
         <ScrollView>
           {isloading ? (
             <View
@@ -133,10 +132,8 @@ const Dashboard = ({ navigation }) => {
                   alignSelf: 'center',
                   alignItems: 'center',
                   marginVertical: '5%',
-
-
                 }}>
-                <View style={{ marginRight: '10%' }}>
+                <View style={{marginRight: '10%'}}>
                   <View
                     style={{
                       width: wp('40%'),
@@ -146,8 +143,15 @@ const Dashboard = ({ navigation }) => {
                       borderRadius: 10,
                       backgroundColor: '#FFFCE4',
                     }}>
-                    <Image style={{ width: 31, height: 23, marginLeft: 10, marginVertical: 6 }} source={require('../images/tick1.png')} />
-
+                    <Image
+                      style={{
+                        width: 31,
+                        height: 23,
+                        marginLeft: 10,
+                        marginVertical: 6,
+                      }}
+                      source={require('../assets/iconImages/tick1.png')}
+                    />
 
                     <Text
                       style={{
@@ -159,13 +163,12 @@ const Dashboard = ({ navigation }) => {
                       {dashdata && dashdata.openQuery}
                     </Text>
 
-
                     <Text
                       style={{
                         alignSelf: 'center',
 
                         color: '#FFC107',
-                        fontSize: 15
+                        fontSize: 15,
                       }}>
                       OpenQuery
                     </Text>
@@ -181,9 +184,16 @@ const Dashboard = ({ navigation }) => {
                     marginLeft: 5,
                     borderRadius: 10,
                     backgroundColor: '#F6F6F6',
-
                   }}>
-                  <Image style={{ width: 30, height: 30, marginLeft: 10, marginVertical: 3 }} source={require('../images/up.png')} />
+                  <Image
+                    style={{
+                      width: 30,
+                      height: 30,
+                      marginLeft: 10,
+                      marginVertical: 3,
+                    }}
+                    source={require('../assets/iconImages/up.png')}
+                  />
                   <Text
                     style={{
                       alignSelf: 'center',
@@ -239,9 +249,8 @@ const Dashboard = ({ navigation }) => {
                   flexDirection: 'row',
                   alignSelf: 'center',
                   alignItems: 'center',
-
                 }}>
-                <View style={{ marginRight: "10%" }}>
+                <View style={{marginRight: '10%'}}>
                   <View
                     style={{
                       width: wp('40%'),
@@ -251,7 +260,15 @@ const Dashboard = ({ navigation }) => {
                       borderRadius: 10,
                       backgroundColor: '#FFF3F9',
                     }}>
-                    <Image style={{ width: 30, height: 30, marginLeft: 10, marginVertical: 3 }} source={require('../images/user.png')} />
+                    <Image
+                      style={{
+                        width: 30,
+                        height: 30,
+                        marginLeft: 10,
+                        marginVertical: 3,
+                      }}
+                      source={require('../assets/iconImages/user.png')}
+                    />
                     <Text
                       style={{
                         alignSelf: 'center',
@@ -271,7 +288,6 @@ const Dashboard = ({ navigation }) => {
                       TotalQuery
                     </Text>
                   </View>
-
                 </View>
                 <View
                   style={{
@@ -283,7 +299,15 @@ const Dashboard = ({ navigation }) => {
                     borderRadius: 10,
                     backgroundColor: '#F2F9FF',
                   }}>
-                  <Image style={{ width: 30, height: 30, marginLeft: 10, marginVertical: 3 }} source={require('../images/i.png')} />
+                  <Image
+                    style={{
+                      width: 30,
+                      height: 30,
+                      marginLeft: 10,
+                      marginVertical: 3,
+                    }}
+                    source={require('../assets/iconImages/i.png')}
+                  />
                   <Text
                     style={{
                       alignSelf: 'center',
@@ -331,16 +355,16 @@ const Dashboard = ({ navigation }) => {
                   TeamCount
                 </Text> */}
               </View>
-                <View style={{marginTop:25}}></View>
+              <View style={{marginTop: 25}}></View>
               <LineChart
-                  data={data}
-                  width ={360}
-                  height={220}
-                  chartConfig={chartConfig}
-                  withShadow={false}
-                  withInnerLines={false}
-                  withDots={false}
-                />
+                data={data}
+                width={360}
+                height={220}
+                chartConfig={chartConfig}
+                withShadow={false}
+                withInnerLines={false}
+                withDots={false}
+              />
 
               {/* <View
                 style={{

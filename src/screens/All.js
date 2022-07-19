@@ -22,7 +22,7 @@ import axios from 'axios';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {userData, readStatus} from '../config/Api';
-import {socket} from '../Socket';
+import {socket} from '../../Socket';
 import {CommonActions} from '@react-navigation/native';
 import {clearAll} from '../config/Preferences';
 
@@ -165,7 +165,6 @@ const All = ({navigation, value, filterData}) => {
 
     // alert(JSON.stringify(listStory.stories));
 
-    
     if (filterData == '' && listStoryTemp.length > 0) {
       setliststory(listStoryTemp);
       return;

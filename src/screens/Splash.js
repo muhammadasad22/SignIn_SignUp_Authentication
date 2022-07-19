@@ -36,7 +36,7 @@ const Splash = ({navigation}) => {
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <ImageBackground
         style={{width: '100%', height: '100%'}}
-        source={require('../images/spbg.png')}>
+        source={require('../assets/iconImages/spbg.png')}>
         <Image
           style={{
             width: '90%',
@@ -48,7 +48,7 @@ const Splash = ({navigation}) => {
 
             resizeMode: 'contain',
           }}
-          source={require('../images/splashimg.png')}
+          source={require('../assets/iconImages/splashimg.png')}
         />
         <View style={{alignSelf: 'center'}}>
           {/* <Image
@@ -58,7 +58,10 @@ const Splash = ({navigation}) => {
             }}
             source={require('../images/textblue.png')}
           /> */}
-           <Image style={{width: 190,height:50, alignSelf:"center",marginTop:40}} source={require('../images/query.png')}/>
+          <Image
+            style={{width: 190, height: 50, alignSelf: 'center', marginTop: 40}}
+            source={require('../assets/iconImages/query.png')}
+          />
           {/* <Text style={{alignSelf: 'center', fontSize: 30}}>
             Converstion App
           </Text> */}

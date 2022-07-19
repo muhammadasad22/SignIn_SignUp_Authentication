@@ -36,7 +36,7 @@ import {
   Toast,
   Root,
 } from 'native-base';
-import Footer from '../Components/Footer';
+import Footer from '../components/Footer';
 import {rootHeight, rootWidth} from '../config/Dimensions';
 import {CheckBox, Button} from 'react-native-elements';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -329,7 +329,7 @@ export default class LoginScreen2 extends Component {
     return (
       <ImageBackground
         style={{width: '100%', height: '100%'}}
-        source={require('../images/spbg.png')}>
+        source={require('../assets/iconImages/spbg.png')}>
         <Root>
           <SafeAreaView>
             <View
@@ -390,7 +390,7 @@ export default class LoginScreen2 extends Component {
       return (
         <View style={{padding: 16, flex: 1, elevation: 8}}>
           <Image
-            source={require('./images/splashim.png')}
+            source={require('../assets/iconImages/splashimg.png')}
             style={{
               width: rootWidth * 0.8,
               height: rootHeight * 0.4,
@@ -400,7 +400,7 @@ export default class LoginScreen2 extends Component {
           />
           <Image
             style={{width: 190, height: 50, alignSelf: 'center', marginTop: 40}}
-            source={require('../images/query.png')}
+            source={require('../assets/iconImages/query.png')}
           />
 
           {/* <Text style={[styles.heading, {color: color_primary}]}> */}

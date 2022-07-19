@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Titlebar} from '../Components/Titlebar';
+import {Titlebar} from '../components/Titlebar';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 const Team1 = navigation => {

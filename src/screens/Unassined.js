@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {
   View,
   StyleSheet,
@@ -8,27 +8,26 @@ import {
   Image,
   RefreshControl,
 } from 'react-native';
-import { Avatar } from 'react-native-elements';
+import {Avatar} from 'react-native-elements';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { allStory, filterCall } from '../config/Api';
-import { ChatList } from '../Components/ChatList';
-import { getLogin } from '../config/Preferences';
-import { setjwt } from '../config/Api';
+import {allStory, filterCall, unassingList} from '../config/Api';
+import {ChatList} from '../components/ChatList';
+import {getLogin} from '../config/Preferences';
+import {setjwt} from '../config/Api';
 import moment from 'moment';
-
 import axios from 'axios';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { userData, readStatus } from '../config/Api';
-import { socket } from '../Socket';
-import { CommonActions } from '@react-navigation/native';
-import { clearAll } from '../config/Preferences';
-import Loader from '../Components/Loader';
+import {userData, readStatus} from '../config/Api';
+import {socket} from '../../Socket';
+import {CommonActions} from '@react-navigation/native';
+import {clearAll} from '../config/Preferences';
+import Loader from '../components/Loader';
 
-const Team = ({ navigation, value, filterData, index }) => {
+const Unassined = ({navigation, value, filterData, index}) => {
   const [listStory, setliststory] = useState([]);
   const [listStoryTemp, setliststoryTemp] = useState([]);
   const [count, setcount] = useState(1);
@@ -48,55 +47,68 @@ const Team = ({ navigation, value, filterData, index }) => {
       setRefreshing(false);
     });
   }, []);
+
+  const updateData = storyMessage => {
+    // let obj = {};
+    // let mData = listStoryTemp.stories.filter((item, index) => {
+    //   if (item._id == storyMessage.storyId) {
+    //     obj = item;
+    //   }
+    //   return item._id != storyMessage.storyId;
+    // });
+    // mData.push(obj);
+    // alert(JSON.stringify(mData));
+  };
   useEffect(() => {
     // alert(value);
-    socket.emit('join', { jwt: userData.jwt });
+    socket.emit('join', {jwt: userData.jwt});
+    const socketHandler = storyMessage => {
+      //alert('Story Called...');
 
-    const socketHandler = chatMessage => {
+      //() => updateData(storyMessage);
+      // let obj = {};
+      // let mData = listStoryTemp.stories.filter((item, index) => {
+      //   if (item._id == storyMessage.storyId) {
+      //     obj = item;
+      //   }
+
+      //   return item._id != storyMessage.storyId;
+      // });
+      // mData.push(obj);
+
+      // alert(JSON.stringify(mData));
+
+      console.log('Story Message Socket => ' + JSON.stringify(storyMessage));
       getStory();
-
-      // setliststory(liststory => [chatMessage, ...liststory]);
     };
-
     socket.on('connect', () => {
       console.log('Story connected'); // x8WIv7-mJelg7on_ALbx
     });
-
-    const socketHandler1 = chatMessage => {
-      console.log(JSON.stringify(chatMessage));
-      socket.emit('join', {
-        storyId: chatMessage.storyId,
-      });
-      getStory();
-      // setliststory(liststory => [chatMessage, ...liststory]);
-    };
-    // alert(respjwt);
-
     getStory();
-    // alert(typeof userData.oneid);
-    // console.log('..............');
+
     socket.on(userData.org_oneid, socketHandler);
-    socket.on(userData.oneid, socketHandler1);
+
     return () => {
       socket.off('connect', socketHandler);
     };
   }, [value]);
 
   useEffect(() => {
-    if (index == 1) {
+    if (index == 2) {
       SearchData();
     }
   }, [filterData]);
 
   const getStory = () => {
-    //  alert('filter' + filterData);
+    // alert('filter' + filterData);
 
     if (value == 0) {
       // let data = tempData.filter(item => item.status == value);
 
-      filterCall({ status: 0 })
+      filterCall({status: 0})
         .then(res => {
-            //  alert(JSON.stringify(res.data));
+          //alert(JSON.stringify(res.data.stories));
+
           setliststory(res.data);
         })
         .catch(error => {
@@ -108,7 +120,7 @@ const Team = ({ navigation, value, filterData, index }) => {
 
     if (value == 1) {
       // let data = tempData.filter(item => item.unreadCount == 0);
-      filterCall({ status: 1 }).then(res => {
+      filterCall({status: 1}).then(res => {
         setliststory(res.data);
       });
 
@@ -116,35 +128,36 @@ const Team = ({ navigation, value, filterData, index }) => {
     }
     if (value == 3) {
       // let data = tempData.filter(item => item.unreadCount > 0);
-      filterCall({ status: '3' }).then(res => {
+      filterCall({status: '3'}).then(res => {
         setliststory(res.data);
       });
 
       return;
     }
     // if (value == 4) {
-    //   filterCall({ unread: 1 }).then(res => {
+    //   filterCall({unread: 1}).then(res => {
     //     setliststory(res.data.stories);
     //   });
     // }
 
-    allStory()
+    unassingList()
       .then(resp => {
         setloading(false);
         // console.log('Story' + JSON.stringify(resp.data, null, 2));
 
         // alert('Alert' + JSON.stringify(resp.data[0].entryTime));
-        if (resp.data.message == 'Auth failed') {
-          clearAll();
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 0,
-              routes: [{ name: 'Splash' }],
-            }),
-          );
-        }
+        // if (resp == undefined) {
+        //   clearAll();
+        //   navigation.dispatch(
+        //     CommonActions.reset({
+        //       index: 0,
+        //       routes: [{name: 'Splash'}],
+        //     }),
+        //   );
+        // }
 
         // alert(JSON.stringify(resp.data.stories, null, 2));
+        console.log('dxdiag => ' + JSON.stringify(resp.data.stories));
 
         setliststory(resp.data);
         setliststoryTemp(resp.data);
@@ -171,7 +184,7 @@ const Team = ({ navigation, value, filterData, index }) => {
         let data = [...prevData, ...newData];
 
         // alert(JSON.stringify(data));
-        setliststory({ stories: data });
+        setliststory({stories: data});
         // alert(JSON.stringify(data, null, 2));
       })
 
@@ -196,12 +209,12 @@ const Team = ({ navigation, value, filterData, index }) => {
           .toLowerCase()
           .includes(filterData.toLowerCase());
       });
-      setliststory({ stories: data });
+      setliststory({stories: data});
       return;
     }
   };
   return (
-    <View style={{ backgroundColor: '#ffffff' }}>
+    <View style={{backgroundColor: '#ffffff'}}>
       {isloading ? (
         <View
           style={{
@@ -211,9 +224,8 @@ const Team = ({ navigation, value, filterData, index }) => {
           <Loader />
         </View>
       ) : (
-        <View style={{ backgroundColor: '#F9F9F9', }}>
+        <View style={{backgroundColor: '#F9F9F9'}}>
           <FlatList
-            
             // onEndReached={number => {
             //   let url = 'https://queryq.veevotech.com/inbox/story?page=' + count;
             //   if (url != undefined) {
@@ -234,17 +246,14 @@ const Team = ({ navigation, value, filterData, index }) => {
               nextPage(url, userData.jwt);
             }}
             data={listStory.stories}
-            contentContainerStyle={
-              {
-                  paddingBottom: '40%',
-                // flaxGrow:1
-              }
-            }
+            contentContainerStyle={{
+              paddingBottom: '40%',
+            }}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
+            renderItem={({item, index}) => (
               <TouchableOpacity
                 onPress={() => {
                   getStory();
@@ -272,12 +281,13 @@ const Team = ({ navigation, value, filterData, index }) => {
                 }}>
                 <View style={styles.listItem}>
                   <Image
-                    style={{ width: 50, height: 50, borderRadius: 40 }}
+                    style={{width: 50, height: 50, borderRadius: 40}}
                     source={{
-                      uri: `${item.initiatorContactId.dpLink == '0'
+                      uri: `${
+                        item.initiatorContactId.dpLink == '0'
                           ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzZ_l9f31RLTjwVTR11tw-XsFicjzkRhj7QQ&usqp=CAU'
                           : item.initiatorContactId.dpLink
-                        }`,
+                      }`,
                     }}
                   />
 
@@ -287,45 +297,40 @@ const Team = ({ navigation, value, filterData, index }) => {
                       marginLeft: wp('3%'),
                       flex: 1,
                     }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
                       <Icon
                         name={
                           item.tpOptedInboxId.tpInboxProfile._id == '1'
                             ? 'envelope'
                             : item.tpOptedInboxId.tpInboxProfile._id == '2'
-                              ? 'facebook'
-                              : 'whatsapp'
+                            ? 'facebook'
+                            : 'whatsapp'
                         }
                         size={15}
                         color="blue"
                       />
-                      <Text style={{ marginLeft: 6 }}>
+                      <Text style={{marginLeft: 6}}>
                         {item.tpOptedInboxId.label}
                       </Text>
                     </View>
 
-                    <Text style={{ fontWeight: 'bold', fontSize: 15 }}>
+                    <Text style={{fontWeight: 'bold', fontSize: 15}}>
                       {item.initiatorContactId.name}
                     </Text>
-                    <Text style={{ width: wp('76%') }}>
-                    
-                      { item.lastMessage.length < 50
+                    <Text style={{width: wp('76%')}}>
+                      {item.lastMessage.length < 50
                         ? item.lastMessage
                         : item.lastMessage.substring(0, 50) + '...'}
                     </Text>
-                    {/* <Text style={{ width: wp('76%') }}>
-                            {item.lastMessage}
-                    </Text> */}
                   </View>
                   <View
                     style={{
-                      width: '250%',
+                      width: '150%',
                       height: '40%',
-                    
 
                       flex: 1,
                     }}>
-                    <Text style={{ alignSelf: 'flex-end' }}>
+                    <Text style={{alignSelf: 'flex-end'}}>
                       {moment(item.updateTime * 1000).fromNow()}
                     </Text>
                     {item.unreadCount == 0 ? null : (
@@ -353,7 +358,7 @@ const Team = ({ navigation, value, filterData, index }) => {
   );
 };
 
-export default Team;
+export default Unassined;
 
 const styles = StyleSheet.create({
   container: {

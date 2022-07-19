@@ -22,10 +22,10 @@ import axios from 'axios';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {userData, readStatus} from '../config/Api';
-import {socket} from '../Socket';
+import {socket} from '../../Socket';
 import {CommonActions} from '@react-navigation/native';
 import {clearAll} from '../config/Preferences';
-import Loader from '../Components/Loader';
+import Loader from '../components/Loader';
 
 const Mine = ({navigation, value, filterData, index}) => {
   const [listStory, setliststory] = useState([]);
@@ -223,11 +223,9 @@ const Mine = ({navigation, value, filterData, index}) => {
                   nextPage(url, userData.jwt);
                 }}
                 data={listStory.stories}
-                contentContainerStyle={
-                  {
-                     paddingBottom: '40%',
-                  }
-                }
+                contentContainerStyle={{
+                  paddingBottom: '40%',
+                }}
                 refreshControl={
                   <RefreshControl
                     refreshing={refreshing}

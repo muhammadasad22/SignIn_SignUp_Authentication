@@ -62,7 +62,7 @@ export const Titlebar = ({
     <View style={{}}>
       {backpic ? (
         <ImageBackground
-          source={require('../images/background.png')}
+          source={require('../assets/iconImages/background.png')}
           style={{
             width: '100%',
             height: 56,
@@ -70,8 +70,8 @@ export const Titlebar = ({
           }}>
           {textimage ? (
             <Image
-              style={{height: 40, width: 40, marginTop: 5,marginLeft:8}}
-              source={require('../images/text.png')}
+              style={{height: 40, width: 40, marginTop: 5, marginLeft: 8}}
+              source={require('../assets/iconImages/text.png')}
             />
           ) : <Image
               style={{
@@ -80,7 +80,7 @@ export const Titlebar = ({
                 marginTop: 5,
                 alignSelf: 'center',
               }}
-              source={require('../images/team.png')}
+              source={require('../assets/iconImages/team.png')}
             /> ? null : null}
           {arrowimage ? (
             <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -89,10 +89,10 @@ export const Titlebar = ({
                   height: 30,
                   width: 30,
                   marginTop: 10,
-                  marginLeft:8,
+                  marginLeft: 8,
                   padding: 10,
                 }}
-                source={require('../images/arrow.png')}
+                source={require('../assets/iconImages/arrow.png')}
               />
             </TouchableOpacity>
           ) : null}
@@ -115,7 +115,7 @@ export const Titlebar = ({
                 flex: 1,
                 textAlign: headtext == true ? 'center' : 'left',
                 padding: 10,
-                marginLeft:5,
+                marginLeft: 5,
                 alignSelf: 'center',
               }}>
               {textchange}
@@ -148,20 +148,23 @@ export const Titlebar = ({
 
           {mainmenu ? (
             <Menu
-               style={{
-                 marginTop:40,
-                 
-               }}
+              style={{
+                marginTop: 40,
+              }}
               visible={visible}
               anchor={
                 <TouchableOpacity onPress={showMenu}>
                   <Image
-                    source={require('../images/menu.png')}
-                    style={{width: 25, height: 25, marginTop: 15,marginRight:10,}}></Image>
+                    source={require('../assets/iconImages/menu.png')}
+                    style={{
+                      width: 25,
+                      height: 25,
+                      marginTop: 15,
+                      marginRight: 10,
+                    }}></Image>
                 </TouchableOpacity>
               }
               onRequestClose={hideMenu}>
-            
               <MenuItem onPress={logout}>Logout</MenuItem>
             </Menu>
           ) : null}

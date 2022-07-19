@@ -27,7 +27,7 @@ import {
   color_text,
   lightBlue,
 } from '../config/theme';
-import Loader from '../Components/Loader';
+import Loader from '../components/Loader';
 import {ApiUrl} from '../config/Constants';
 import axios from 'axios';
 import {Container, Content, Item, Input, Root} from 'native-base';
@@ -39,7 +39,7 @@ import {rootHeight, rootWidth} from '../config/Dimensions';
 import {findUser} from './Api';
 import {Button} from 'react-native-elements';
 import {showToast} from './CustomToast';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 //import DeviceInfo from 'react-native-device-info';
 
 // import { SafeAreaView } from 'react-navigation';
@@ -104,7 +104,7 @@ export default class LoginScreen extends Component {
     return (
       <ImageBackground
         style={{width: '100%', height: '100%'}}
-        source={require('../images/spbg.png')}>
+        source={require('../assets/iconImages/spbg.png')}>
         <Root>
           <SafeAreaView>
             <View
@@ -172,7 +172,7 @@ export default class LoginScreen extends Component {
           /> */}
 
           <Image
-            source={require('./images/splashim.png')}
+            source={require('../assets/iconImages/splashimg.png')}
             style={{
               width: rootWidth * 0.8,
               height: rootHeight * 0.4,
@@ -180,15 +180,18 @@ export default class LoginScreen extends Component {
               marginTop: 10,
             }}
           />
-           <Image style={{width: 190,height:50, alignSelf:"center",marginTop:40}} source={require('../images/query.png')}/>
+          <Image
+            style={{width: 190, height: 50, alignSelf: 'center', marginTop: 40}}
+            source={require('../assets/iconImages/query.png')}
+          />
           {/* <Text style={[styles.heading, {color: color_primary}]}> */}
-            {/* <Text style={[styles.heading, {color: color_text}]}>
+          {/* <Text style={[styles.heading, {color: color_text}]}>
               Conversation
             </Text> */}
-            {/* <View></View> */}
+          {/* <View></View> */}
           {/* </Text> */}
           <Text
-            style={{ 
+            style={{
               fontSize: 14,
               fontWeight: 'bold',
               alignSelf: 'center',

@@ -13,21 +13,22 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {allStory, filterCall, unassingList} from '../config/Api';
-import {ChatList} from '../Components/ChatList';
+import {allStory, filterCall} from '../config/Api';
+import {ChatList} from '../components/ChatList';
 import {getLogin} from '../config/Preferences';
 import {setjwt} from '../config/Api';
 import moment from 'moment';
+
 import axios from 'axios';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {userData, readStatus} from '../config/Api';
-import {socket} from '../Socket';
+import {socket} from '../../Socket';
 import {CommonActions} from '@react-navigation/native';
 import {clearAll} from '../config/Preferences';
-import Loader from '../Components/Loader';
+import Loader from '../components/Loader';
 
-const Unassined = ({navigation, value, filterData, index}) => {
+const Team = ({navigation, value, filterData, index}) => {
   const [listStory, setliststory] = useState([]);
   const [listStoryTemp, setliststoryTemp] = useState([]);
   const [count, setcount] = useState(1);
@@ -47,68 +48,55 @@ const Unassined = ({navigation, value, filterData, index}) => {
       setRefreshing(false);
     });
   }, []);
-
-  const updateData = storyMessage => {
-    // let obj = {};
-    // let mData = listStoryTemp.stories.filter((item, index) => {
-    //   if (item._id == storyMessage.storyId) {
-    //     obj = item;
-    //   }
-    //   return item._id != storyMessage.storyId;
-    // });
-    // mData.push(obj);
-    // alert(JSON.stringify(mData));
-  };
   useEffect(() => {
     // alert(value);
     socket.emit('join', {jwt: userData.jwt});
-    const socketHandler = storyMessage => {
-      //alert('Story Called...');
 
-      //() => updateData(storyMessage);
-      // let obj = {};
-      // let mData = listStoryTemp.stories.filter((item, index) => {
-      //   if (item._id == storyMessage.storyId) {
-      //     obj = item;
-      //   }
-
-      //   return item._id != storyMessage.storyId;
-      // });
-      // mData.push(obj);
-
-      // alert(JSON.stringify(mData));
-
-      console.log('Story Message Socket => ' + JSON.stringify(storyMessage));
+    const socketHandler = chatMessage => {
       getStory();
+
+      // setliststory(liststory => [chatMessage, ...liststory]);
     };
+
     socket.on('connect', () => {
       console.log('Story connected'); // x8WIv7-mJelg7on_ALbx
     });
+
+    const socketHandler1 = chatMessage => {
+      console.log(JSON.stringify(chatMessage));
+      socket.emit('join', {
+        storyId: chatMessage.storyId,
+      });
+      getStory();
+      // setliststory(liststory => [chatMessage, ...liststory]);
+    };
+    // alert(respjwt);
+
     getStory();
-
+    // alert(typeof userData.oneid);
+    // console.log('..............');
     socket.on(userData.org_oneid, socketHandler);
-
+    socket.on(userData.oneid, socketHandler1);
     return () => {
       socket.off('connect', socketHandler);
     };
   }, [value]);
 
   useEffect(() => {
-    if (index == 2) {
+    if (index == 1) {
       SearchData();
     }
   }, [filterData]);
 
   const getStory = () => {
-    // alert('filter' + filterData);
+    //  alert('filter' + filterData);
 
     if (value == 0) {
       // let data = tempData.filter(item => item.status == value);
 
       filterCall({status: 0})
         .then(res => {
-          //alert(JSON.stringify(res.data.stories));
-
+          //  alert(JSON.stringify(res.data));
           setliststory(res.data);
         })
         .catch(error => {
@@ -135,29 +123,28 @@ const Unassined = ({navigation, value, filterData, index}) => {
       return;
     }
     // if (value == 4) {
-    //   filterCall({unread: 1}).then(res => {
+    //   filterCall({ unread: 1 }).then(res => {
     //     setliststory(res.data.stories);
     //   });
     // }
 
-    unassingList()
+    allStory()
       .then(resp => {
         setloading(false);
         // console.log('Story' + JSON.stringify(resp.data, null, 2));
 
         // alert('Alert' + JSON.stringify(resp.data[0].entryTime));
-        // if (resp == undefined) {
-        //   clearAll();
-        //   navigation.dispatch(
-        //     CommonActions.reset({
-        //       index: 0,
-        //       routes: [{name: 'Splash'}],
-        //     }),
-        //   );
-        // }
+        if (resp.data.message == 'Auth failed') {
+          clearAll();
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{name: 'Splash'}],
+            }),
+          );
+        }
 
         // alert(JSON.stringify(resp.data.stories, null, 2));
-        console.log('dxdiag => ' + JSON.stringify(resp.data.stories));
 
         setliststory(resp.data);
         setliststoryTemp(resp.data);
@@ -246,11 +233,10 @@ const Unassined = ({navigation, value, filterData, index}) => {
               nextPage(url, userData.jwt);
             }}
             data={listStory.stories}
-            contentContainerStyle={
-              {
-                 paddingBottom: '40%',
-              }
-            }
+            contentContainerStyle={{
+              paddingBottom: '40%',
+              // flaxGrow:1
+            }}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
@@ -324,10 +310,13 @@ const Unassined = ({navigation, value, filterData, index}) => {
                         ? item.lastMessage
                         : item.lastMessage.substring(0, 50) + '...'}
                     </Text>
+                    {/* <Text style={{ width: wp('76%') }}>
+                            {item.lastMessage}
+                    </Text> */}
                   </View>
                   <View
                     style={{
-                      width: '150%',
+                      width: '250%',
                       height: '40%',
 
                       flex: 1,
@@ -360,7 +349,7 @@ const Unassined = ({navigation, value, filterData, index}) => {
   );
 };
 
-export default Unassined;
+export default Team;
 
 const styles = StyleSheet.create({
   container: {

@@ -6,7 +6,7 @@ import Unassined from '../screens/Unassined';
 import All from '../screens/All';
 import {View} from 'react-native';
 import {Tab, Text, TabView} from 'react-native-elements';
-import {ChatList} from '../Components/ChatList';
+import {ChatList} from '../components/ChatList';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
