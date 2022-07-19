@@ -1,0 +1,1 @@
+QueryQ is messaging application
